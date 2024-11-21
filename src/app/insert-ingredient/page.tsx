@@ -6,6 +6,7 @@ import supabase from '../supabaseClient/supabaseClient';
 interface Ingredient {
   id: number;
   name: string;
+  tags: string;
 }
 
 
@@ -31,7 +32,7 @@ function MyComponent() {
   return (
     <div>
       {data.map((item) => (
-        <p key={item.id}>{item.name}</p>
+        <p key={item.id}>{item.name} {item.tags}</p>
       ))}
     </div>
   );
