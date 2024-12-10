@@ -1,8 +1,10 @@
 import Link from "next/link";
 
+// Define the styles with correct types for textAlign
 const styles = {
   container: {
-    textAlign: "center", // No type assertion needed here
+    // eslint-disable-next-line @typescript-eslint/prefer-as-const
+    textAlign: "center" as "center", // Explicitly set the type for textAlign
     padding: "20px",
     fontFamily: "Arial, sans-serif",
   },
