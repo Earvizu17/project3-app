@@ -1,17 +1,16 @@
-// db.js
-import { Pool } from "pg";
+import db from "../../lib/db";
 
-const pool = new Pool({
-  user: "your_user",
-  host: "localhost",
-  database: "your_database",
-  password: "your_password",
-  port: 5432, // Default PostgreSQL port
-});
-
-const db = {
-  query: (text, params) => pool.query(text, params),
-};
-
-export default db;
-
+export default async function handler(req, res) {
+  if (req.method === "POST") {
+    const { name } = req.body;
+    if (!name || name.trim() === "") {
+      return res.status(400).json({ error: "Tag name is required." });
+    }
+    try {
+      await db.query("INSERT INTO tags (name) VALUES ($1)", [name]);
+      res.status(200).json({ success: true });
+    } catch (error) {
+      res.status(500).json({ error: "Database error." });
+    }
+  }
+}
