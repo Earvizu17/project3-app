@@ -1,10 +1,9 @@
 import Link from "next/link";
 
-// Define the styles with correct types for textAlign
+// Define the styles with correct types for flexDirection
 const styles = {
   container: {
-    // eslint-disable-next-line @typescript-eslint/prefer-as-const
-    textAlign: "center" as "center", // Explicitly set the type for textAlign
+    textAlign: "center" as const, // Explicitly set the type for textAlign
     padding: "20px",
     fontFamily: "Arial, sans-serif",
   },
@@ -14,7 +13,7 @@ const styles = {
   },
   navContainer: {
     display: "flex",
-    flexDirection: "column",
+    flexDirection: "column" as const, // Explicitly set the type for flexDirection
     alignItems: "center",
   },
   navLink: {
