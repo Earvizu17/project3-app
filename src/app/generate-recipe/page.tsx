@@ -2,21 +2,23 @@
 import { useState } from "react";
 import supabase from "../supabaseClient/supabaseClient"; // Adjust based on your setup
 
-export default function Recipe() {
-  const [tags, setTags] = useState("");
-  const [stepCount, setStepCount] = useState(3); // Default to 3 steps
-  const [generatedRecipe, setGeneratedRecipe] = useState(null);
-  const [message, setMessage] = useState("");
+interface TableRow {
+  id: number;
+  name: string;
+  tags: string;
+}
 
-  const fetchTableData = async (table: string, selectedTags: string[] = []): Promise<any[]> => {
-    let query = supabase.from(table).select("*");
-    if (selectedTags.length > 0) {
-      query = query.ilike("tags", `%${selectedTags.join("%")}%`); // Adjust if your tags column differs
-    }
-    const { data, error } = await query;
-    if (error) throw new Error(`Error fetching from ${table}: ${error.message}`);
-    return data || []; // Ensure it always returns an array
-  };
+const fetchTableData = async (table: string, selectedTags: string[] = []): Promise<TableRow[]> => {
+  let query = supabase.from(table).select("*");
+  if (selectedTags.length > 0) {
+    query = query.ilike("tags", `%${selectedTags.join("%")}%`);
+  }
+  const { data, error } = await query;
+  if (error) throw new Error(`Error fetching from ${table}: ${error.message}`);
+  return data || [];
+};
+
+  
   
 
   const generateRecipe = async () => {
