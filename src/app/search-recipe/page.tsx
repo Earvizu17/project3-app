@@ -28,10 +28,9 @@ export default function SearchRecipe() {
     setLoading(true);
 
     const { data, error } = await supabase
-  .from("Saved Recipes") // Replace with your Supabase table name
-  .select("*")
-  .or(`name.ilike.%${searchQuery}%,tags.ilike.%${searchQuery}%`); // Combine conditions in a single string with comma separation
-
+      .from("Saved Recipes") // Replace with your Supabase table name
+      .select("*")
+      .or(`name.ilike.%${searchQuery}%`, `tags.ilike.%${searchQuery}%`); // Search by name or tags
 
     if (error) {
       console.error("Error fetching recipes:", error);
@@ -40,17 +39,19 @@ export default function SearchRecipe() {
       setRecipes(data || []);
 
       // Trigger animations for the results
-      gsap.fromTo(
-        resultsRef.current?.children,
-        { opacity: 0, y: 20 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.8,
-          ease: "power3.out",
-          stagger: 0.2,
-        }
-      );
+      if (resultsRef.current) {
+        gsap.fromTo(
+          resultsRef.current.children,
+          { opacity: 0, y: 20 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.8,
+            ease: "power3.out",
+            stagger: 0.2,
+          }
+        );
+      }
     }
 
     setLoading(false);
