@@ -19,28 +19,31 @@ function MyComponent() {
 
   useEffect(() => {
     fetchData();
-    
+  
     // Animating the form on load
     gsap.fromTo(
       formRef.current,
       { opacity: 0, y: 30 },
       { opacity: 1, y: 0, duration: 1, ease: "power3.out" }
     );
-
-    // Animating the ingredients list on load
-    gsap.fromTo(
-      listRef.current?.children,
-      { opacity: 0, y: 20 },
-      {
-        opacity: 1,
-        y: 0,
-        duration: 0.8,
-        ease: "power3.out",
-        stagger: 0.2,
-        delay: 0.5, // Starts after form animation
-      }
-    );
+  
+    // Check if listRef.current is defined and animate the ingredients list
+    if (listRef.current) {
+      gsap.fromTo(
+        listRef.current.children,
+        { opacity: 0, y: 20 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.8,
+          ease: "power3.out",
+          stagger: 0.2,
+          delay: 0.5, // Starts after form animation
+        }
+      );
+    }
   }, []);
+  
 
   async function fetchData() {
     const { data, error } = await supabase.from("Ingredients").select("*");
