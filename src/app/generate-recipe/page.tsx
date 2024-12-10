@@ -5,7 +5,8 @@ import supabase from "../supabaseClient/supabaseClient"; // Adjust based on your
 interface TableRow {
   id: number;
   name: string;
-  tags: string; // Adjust the type based on your actual schema
+  tags: string;
+  template?: string;  // Make 'template' optional, in case it's not present in some rows
 }
 
 export default function Recipe() {
@@ -56,8 +57,8 @@ export default function Recipe() {
         const ingredient = ingredients[index % ingredients.length].name;
         const method = methods[index % methods.length].name;
         return step.template
-          .replace("{ingredient}", ingredient)
-          .replace("{method}", method);
+          ? step.template.replace("{ingredient}", ingredient).replace("{method}", method)
+          : `${method} the ${ingredient}`;  // Fallback if template is missing
       });
 
       const recipeName =
