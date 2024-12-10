@@ -4,10 +4,16 @@ import React, { useState, useRef, useEffect } from "react";
 import supabase from "../supabaseClient/supabaseClient";
 import gsap from "gsap";
 
+// Define the type of a cooking step
+interface CookingStep {
+  id: number;
+  template: string;
+}
+
 export default function CookingSteps() {
   const [template, setTemplate] = useState("");
   const [message, setMessage] = useState("");
-  const [steps, setSteps] = useState([]);
+  const [steps, setSteps] = useState<CookingStep[]>([]); // Explicitly type the state
 
   // Refs for animations
   const headingRef = useRef<HTMLHeadingElement>(null);
@@ -23,13 +29,13 @@ export default function CookingSteps() {
       setSteps(data);
     }
   };
-  
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const { error } = await supabase
       .from("Cooking Steps")
       .insert([{ template }]);
-  
+
     if (error) {
       setMessage("Error inserting cooking step");
     } else {
@@ -38,7 +44,6 @@ export default function CookingSteps() {
       fetchCookingSteps();
     }
   };
-  
 
   useEffect(() => {
     fetchCookingSteps();
