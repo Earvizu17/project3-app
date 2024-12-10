@@ -15,11 +15,14 @@ export default function Home() {
         <Link href="/generate-recipe" style={styles.navLink}>
           Generate Recipe
         </Link>
-        <Link href="/search-recipes" style={styles.navLink}>
+        <Link href="/search-recipe" style={styles.navLink}>
           Search Recipes
         </Link>
         <Link href="/insert-tag" style={styles.navLink}>
           View Tag
+        </Link>
+        <Link href="/insert-cookingsteps" style={styles.navLink}>
+          add cooking steps
         </Link>
       </div>
     </div>
