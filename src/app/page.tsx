@@ -2,7 +2,7 @@ import Link from "next/link";
 
 const styles = {
   container: {
-    textAlign: "center" as "center", // This ensures the correct type
+    textAlign: "center", // No type assertion needed here
     padding: "20px",
     fontFamily: "Arial, sans-serif",
   },
