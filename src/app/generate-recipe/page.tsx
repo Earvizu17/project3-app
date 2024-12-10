@@ -8,15 +8,16 @@ export default function Recipe() {
   const [generatedRecipe, setGeneratedRecipe] = useState(null);
   const [message, setMessage] = useState("");
 
-  const fetchTableData = async (table, selectedTags = []) => {
+  const fetchTableData = async (table: string, selectedTags: string[] = []): Promise<any[]> => {
     let query = supabase.from(table).select("*");
     if (selectedTags.length > 0) {
       query = query.ilike("tags", `%${selectedTags.join("%")}%`); // Adjust if your tags column differs
     }
     const { data, error } = await query;
     if (error) throw new Error(`Error fetching from ${table}: ${error.message}`);
-    return data;
+    return data || []; // Ensure it always returns an array
   };
+  
 
   const generateRecipe = async () => {
     try {
