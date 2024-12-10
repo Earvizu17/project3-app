@@ -1,5 +1,27 @@
 import Link from "next/link";
 
+const styles = {
+  container: {
+    textAlign: "center" as "center", // This ensures the correct type
+    padding: "20px",
+    fontFamily: "Arial, sans-serif",
+  },
+  title: {
+    fontSize: "2rem",
+    fontWeight: "bold",
+  },
+  navContainer: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+  },
+  navLink: {
+    textDecoration: "none",
+    color: "blue",
+    margin: "10px 0",
+  },
+};
+
 export default function Home() {
   return (
     <div style={styles.container}>
@@ -22,34 +44,11 @@ export default function Home() {
           View Tag
         </Link>
         <Link href="/insert-cookingsteps" style={styles.navLink}>
-          add cooking steps
+          Add Cooking Steps
         </Link>
       </div>
     </div>
   );
 }
 
-// Inline styles (optional, replace with CSS module or framework if preferred)
-const styles = {
-  container: {
-    textAlign: "center",
-    padding: "20px",
-    fontFamily: "Arial, sans-serif",
-  },
-  title: {
-    fontSize: "2.5rem",
-    color: "#333",
-    marginBottom: "20px",
-  },
-  navContainer: {
-    display: "flex",
-    flexDirection: "column",
-    gap: "15px",
-  },
-  navLink: {
-    fontSize: "1.2rem",
-    color: "#0070f3",
-    textDecoration: "none",
-    transition: "color 0.2s ease",
-  },
-};
+
