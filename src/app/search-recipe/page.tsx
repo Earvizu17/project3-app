@@ -28,9 +28,10 @@ export default function SearchRecipe() {
     setLoading(true);
 
     const { data, error } = await supabase
-      .from("Saved Recipes") // Replace with your Supabase table name
-      .select("*")
-      .or(`name.ilike.%${searchQuery}%`, `tags.ilike.%${searchQuery}%`); // Search by name or tags
+  .from("Saved Recipes") // Replace with your Supabase table name
+  .select("*")
+  .or(`name.ilike.%${searchQuery}%,tags.ilike.%${searchQuery}%`); // Combine conditions in a single string with comma separation
+
 
     if (error) {
       console.error("Error fetching recipes:", error);
