@@ -36,7 +36,7 @@ export default function InsertTag() {
     }
 
     // Insert the tag into the Supabase table
-    const { data, error } = await supabase
+    const { error } = await supabase
       .from("Descriptor") // Replace with your actual table name
       .insert([{ name: tagName }]);
 

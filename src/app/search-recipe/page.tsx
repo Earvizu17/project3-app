@@ -57,7 +57,7 @@ export default function SearchRecipe() {
 
   async function handleLike(recipeId: number) {
     // Increment likes in the database
-    const { data, error } = await supabase
+    const { error } = await supabase
       .from("Saved Recipes") // Replace with your Supabase table name
       .update({ likes: supabase.raw("likes + 1") })
       .eq("id", recipeId);

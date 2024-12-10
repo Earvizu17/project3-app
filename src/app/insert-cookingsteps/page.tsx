@@ -23,13 +23,13 @@ export default function CookingSteps() {
       setSteps(data);
     }
   };
-
+  
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const { data, error } = await supabase
+    const { error } = await supabase
       .from("Cooking Steps")
       .insert([{ template }]);
-
+  
     if (error) {
       setMessage("Error inserting cooking step");
     } else {
@@ -38,6 +38,7 @@ export default function CookingSteps() {
       fetchCookingSteps();
     }
   };
+  
 
   useEffect(() => {
     fetchCookingSteps();
