@@ -48,8 +48,9 @@ export default function Recipe() {
       }
 
       // Randomize and select data for the recipe
-      const randomize = (arr, count) =>
-        arr.sort(() => 0.5 - Math.random()).slice(0, count);
+      const randomize = (arr: TableRow[], count: number): TableRow[] => {
+        return arr.sort(() => 0.5 - Math.random()).slice(0, count);
+      };
 
       const recipeSteps = randomize(steps, stepCount).map((step, index) => {
         const ingredient = ingredients[index % ingredients.length].name;
