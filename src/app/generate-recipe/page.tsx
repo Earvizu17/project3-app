@@ -6,13 +6,19 @@ interface TableRow {
   id: number;
   name: string;
   tags: string;
-  template?: string;  // Make 'template' optional, in case it's not present in some rows
+  template?: string;
+}
+
+// Define the type of the generated recipe
+interface GeneratedRecipe {
+  name: string;
+  steps: string[];
 }
 
 export default function Recipe() {
   const [tags, setTags] = useState("");
   const [stepCount, setStepCount] = useState(3); // Default to 3 steps
-  const [generatedRecipe, setGeneratedRecipe] = useState(null);
+  const [generatedRecipe, setGeneratedRecipe] = useState<GeneratedRecipe | null>(null); // Explicitly define the type
   const [message, setMessage] = useState("");
 
   const fetchTableData = async (table: string, selectedTags: string[] = []): Promise<TableRow[]> => {
@@ -64,6 +70,7 @@ export default function Recipe() {
       const recipeName =
         randomize(descriptors, 1)[0].name + " " + randomize(ingredients, 1)[0].name;
 
+      // Now that we know the structure of the object, TypeScript can infer the type
       setGeneratedRecipe({
         name: recipeName,
         steps: recipeSteps,
