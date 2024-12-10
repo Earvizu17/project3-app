@@ -78,7 +78,8 @@ export default function Recipe() {
       setMessage("Recipe generated successfully!");
     } catch (error) {
       console.error(error);
-      setMessage("Error generating recipe: " + error.message);
+      // TypeScript expects a more specific error type, so we cast it to an Error
+      setMessage("Error generating recipe: " + (error instanceof Error ? error.message : "Unknown error"));
     }
   };
 
