@@ -63,18 +63,20 @@ export default function CookingSteps() {
     );
 
     // Animate list of steps
-    gsap.fromTo(
-      listRef.current?.children,
-      { opacity: 0, y: 20 },
-      {
-        opacity: 1,
-        y: 0,
-        duration: 0.8,
-        ease: "power3.out",
-        stagger: 0.2,
-        delay: 1, // Starts after form animation
-      }
-    );
+    if (listRef.current) {
+      gsap.fromTo(
+        listRef.current.children,
+        { opacity: 0, y: 20 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.8,
+          ease: "power3.out",
+          stagger: 0.2,
+          delay: 1, // Starts after form animation
+        }
+      );
+    }
 
     // Button hover animation
     gsap.to(buttonRef.current, {
