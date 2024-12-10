@@ -61,7 +61,7 @@ export default function SearchRecipe() {
     // Increment likes in the database
     const { error } = await supabase
       .from("Saved Recipes") // Replace with your Supabase table name
-      .update({ likes: supabase.raw("likes + 1") })
+      .update({ likes: supabase.rpc('increment_likes', { recipe_id: recipeId }) })
       .eq("id", recipeId);
 
     if (error) {
